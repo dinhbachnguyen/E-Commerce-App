@@ -1,6 +1,3 @@
-Absolutely! Here’s a **ready-to-copy README.md** you can paste directly into your GitHub repository:
-
-````markdown
 # E-Commerce Web Application
 
 A full-stack **e-commerce web application** built with **Angular** (frontend) and **C# .NET** (backend). Users can browse products, view product details, add items to the shopping cart, and manage orders. The project also includes frontend fallback data to handle backend unavailability.
