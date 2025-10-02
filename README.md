@@ -71,12 +71,3 @@ The frontend will run on `http://localhost:4200` and backend on `http://localhos
 * Cart is managed locally in frontend memory
 
 ---
-
-## License
-
-MIT License
-
-```
-
----
-
