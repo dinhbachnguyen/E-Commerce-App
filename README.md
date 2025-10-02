@@ -78,4 +78,3 @@ The frontend will run on `http://localhost:4200` and backend on `http://localhos
 * Seed data is preloaded in the backend for initial products
 * Cart is managed locally in frontend memory
 
----
