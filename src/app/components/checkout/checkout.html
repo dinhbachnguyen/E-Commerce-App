@@ -1,0 +1,37 @@
+<div *ngIf="cartItems.length === 0">
+  <p>Your cart is empty. Add products before checkout.</p>
+</div>
+
+<div *ngIf="cartItems.length > 0">
+  <h2>Checkout</h2>
+
+  <form [formGroup]="checkoutForm" (ngSubmit)="submitOrder()">
+    <label>Full Name:</label>
+    <input formControlName="fullName" type="text">
+    
+    <label>Email:</label>
+    <input formControlName="email" type="email">
+    
+    <label>Address:</label>
+    <input formControlName="address" type="text">
+    
+    <label>City:</label>
+    <input formControlName="city" type="text">
+    
+    <label>Postal Code:</label>
+    <input formControlName="postalCode" type="text">
+    
+    <label>Country:</label>
+    <input formControlName="country" type="text">
+    
+    <h3>Order Summary</h3>
+    <ul>
+      <li *ngFor="let item of cartItems">
+        {{ item.name }} x {{ item.quantity }} - {{ item.price * item.quantity | currency }}
+      </li>
+    </ul>
+    <h4>Total: {{ total | currency }}</h4>
+    
+    <button type="submit">Place Order</button>
+  </form>
+</div>

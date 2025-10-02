@@ -1,0 +1,13 @@
+<div class="home-container">
+  <h2>Welcome to Our E-Commerce Store!</h2>
+  <p>Check out our featured products</p>
+
+  <div class="featured-products">
+    <div class="product-card" *ngFor="let product of featuredProducts">
+      <img [src]="product.imageUrl" alt="{{ product.name }}">
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.price | currency }}</p>
+      <button [routerLink]="['/product', product.id]">View Details</button>
+    </div>
+  </div>
+</div>
