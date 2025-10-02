@@ -64,7 +64,7 @@ The frontend will run on `http://localhost:4200` and backend on `http://localhos
 
 ## Notes
 
-* Images are stored in `assets/images/products` (frontend)
+* Images are stored in `src/assets` (frontend)
 * Seed data is preloaded in the backend for initial products
 * Cart is managed locally in frontend memory
 
