@@ -4,6 +4,16 @@ A full-stack **e-commerce web application** built with **Angular** (frontend) an
 
 ---
 
+## Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Notes](#notes)
+
+---
+
 ## Features
 
 - Browse all products with images, prices, and descriptions  
