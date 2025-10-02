@@ -18,7 +18,7 @@ A full-stack **e-commerce web application** built with **Angular** (frontend) an
 ## Tech Stack
 
 - **Frontend:** Angular, TypeScript, HTML, SCSS  
-- **Backend:** C# .NET 7, Entity Framework Core, SQLite/SQL Server  <!-- - **Authentication:** JWT   -->
+- **Backend:** C# .NET 7, Entity Framework Core, SQLite  <!-- - **Authentication:** JWT   -->
 - **API:** RESTful endpoints for products, cart, and orders  
 
 ---
