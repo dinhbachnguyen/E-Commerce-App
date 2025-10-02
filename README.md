@@ -9,8 +9,7 @@ A full-stack **e-commerce web application** built with **Angular** (frontend) an
 - Browse all products with images, prices, and descriptions  
 - View detailed information for each product  
 - Add products to shopping cart and update quantities  
-- Clear or remove items from the cart  
-<!-- - User login system (authentication with JWT)   -->
+- Clear or remove items from the cart  <!-- - User login system (authentication with JWT)   -->
 - Fallback frontend data if backend is unavailable  
 - Responsive layout for desktop and mobile  
 
@@ -19,8 +18,7 @@ A full-stack **e-commerce web application** built with **Angular** (frontend) an
 ## Tech Stack
 
 - **Frontend:** Angular, TypeScript, HTML, SCSS  
-- **Backend:** C# .NET 7, Entity Framework Core, SQLite/SQL Server  
-<!-- - **Authentication:** JWT   -->
+- **Backend:** C# .NET 7, Entity Framework Core, SQLite/SQL Server  <!-- - **Authentication:** JWT   -->
 - **API:** RESTful endpoints for products, cart, and orders  
 
 ---
