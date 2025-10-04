@@ -1,161 +1,114 @@
-/* Header / Navbar */
-.navbar {
+/* General reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar */
+header.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 30px;
-  background-color: #007bff;
-  color: white;
+  background: #1e293b; /* sleek dark navy */
+  padding: 15px 40px;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.navbar a {
-  color: white;
-  margin: 0 10px;
+header.navbar .logo a {
+  color: #38bdf8; /* cyan accent */
   text-decoration: none;
-  font-weight: bold;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
-.navbar a:hover {
-  text-decoration: underline;
+header.navbar nav a {
+  margin-left: 30px;
+  color: #f1f5f9;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.25s ease-in-out;
+}
+
+header.navbar nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #38bdf8;
+  transition: width 0.25s ease-in-out;
+}
+
+header.navbar nav a:hover {
+  color: #38bdf8;
+}
+
+header.navbar nav a:hover::after {
+  width: 100%;
+}
+
+/* Active route styling */
+header.navbar nav a.active {
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+header.navbar nav a.active::after {
+  width: 100%;
 }
 
 /* Main content */
 .main-content {
-  padding: 20px;
-  min-height: 80vh;
+  min-height: 75vh;
+  padding: 60px 40px;
+  background: #f8fafc;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Footer */
 .footer {
+  background: #1e293b;
+  color: #94a3b8;
   text-align: center;
-  padding: 15px;
-  background-color: #f2f2f2;
+  padding: 20px;
+  font-size: 0.9rem;
+  border-top: 1px solid #334155;
 }
 
+/* Responsive design */
+@media (max-width: 768px) {
+  header.navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
+  header.navbar nav {
+    margin-top: 10px;
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// /* Global reset & fonts */
-// * {
-//   margin: 0;
-//   padding: 0;
-//   box-sizing: border-box;
-// }
-
-// body {
-//   font-family: 'Roboto', sans-serif;
-//   background: #f9f9f9;
-//   color: #333;
-//   line-height: 1.6;
-//   display: flex;
-//   flex-direction: column;
-//   min-height: 100vh;
-// }
-
-// /* Navbar */
-// .navbar {
-//   background: #1a1a1a;
-//   color: #fff;
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   padding: 1rem 2rem;
-//   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-
-//   .logo a {
-//     font-size: 1.4rem;
-//     font-weight: bold;
-//     text-decoration: none;
-//     color: #fff;
-//     transition: color 0.3s ease;
-
-//     &:hover {
-//       color: #f4c542; // gold accent
-//     }
-//   }
-
-//   nav {
-//     display: flex;
-//     gap: 1.5rem;
-
-//     a {
-//       text-decoration: none;
-//       color: #ddd;
-//       font-weight: 500;
-//       transition: color 0.3s ease, border-bottom 0.3s ease;
-
-//       &:hover {
-//         color: #f4c542;
-//       }
-
-//       &.active {
-//         color: #f4c542;
-//         border-bottom: 2px solid #f4c542;
-//         padding-bottom: 2px;
-//       }
-//     }
-//   }
-// }
-
-// /* Main content */
-// .main-content {
-//   flex: 1;
-//   padding: 2rem;
-//   max-width: 1200px;
-//   margin: 0 auto;
-// }
-
-// /* Footer */
-// .footer {
-//   background: #1a1a1a;
-//   color: #bbb;
-//   text-align: center;
-//   padding: 1rem;
-//   font-size: 0.9rem;
-
-//   p {
-//     margin: 0;
-//   }
-// }
-
-// /* Responsive tweaks */
-// @media (max-width: 768px) {
-//   .navbar {
-//     flex-direction: column;
-//     align-items: flex-start;
-
-//     nav {
-//       margin-top: 1rem;
-//       flex-wrap: wrap;
-//       gap: 1rem;
-//     }
-//   }
-
-//   .main-content {
-//     padding: 1rem;
-//   }
-// }
+  header.navbar nav a {
+    display: block;
+    margin: 10px 0;
+  }
+}
