@@ -42,6 +42,11 @@ __screenshots__/
 .DS_Store
 Thumbs.db
 
-# .NET build folders
+# .NET build artifacts
 /bin/
 /obj/
+*.user
+*.suo
+*.vs
+*.log
+
