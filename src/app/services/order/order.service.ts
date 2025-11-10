@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CartService, CartItem } from '../cart/cart.service';
 import { AuthService } from '../auth/auth.service';
+import { environment } from '../../../environments/environment';
 
 export interface Order {
   id?: number;
@@ -23,8 +24,7 @@ export interface Order {
   providedIn: 'root'
 })
 export class OrderService {
-
-  private apiUrl = 'http://localhost:5000/api/order'; // Replace with your API URL
+  private apiUrl = environment.apiUrl + "5000/api/order"
 
   constructor(
     private http: HttpClient,

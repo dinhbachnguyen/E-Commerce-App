@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
-  private apiUrl = 'http://localhost:5000/api/auth'; // Replace with your API URL
+  private apiUrl = environment.apiUrl + "5000/api/auth"
   private loggedIn = new BehaviorSubject<boolean>(false);
   public isLoggedIn$ = this.loggedIn.asObservable();
 
@@ -52,42 +52,4 @@ export class AuthService {
     });
   }
 }
-
-
-
-
-
-// import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { BehaviorSubject, tap } from 'rxjs';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class AuthService {
-
-//   private apiUrl = 'http://localhost:5000/api/auth';
-//   private loggedIn = new BehaviorSubject<boolean>(false);
-//   isLoggedIn$ = this.loggedIn.asObservable();
-
-//   constructor(private http: HttpClient) {
-//     // Check if token exists in localStorage
-//     this.loggedIn.next(!!localStorage.getItem('token'));
-//   }
-
-//   login(email: string, password: string) {
-//     return this.http.post<{ token: string }>(`${this.apiUrl}/login`, { email, password })
-//       .pipe(
-//         tap(res => {
-//           localStorage.setItem('token', res.token);
-//           this.loggedIn.next(true);
-//         })
-//       );
-//   }
-
-//   logout() {
-//     localStorage.removeItem('token');
-//     this.loggedIn.next(false);
-//   }
-// }
 
