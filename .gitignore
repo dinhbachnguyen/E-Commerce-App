@@ -43,8 +43,8 @@ __screenshots__/
 Thumbs.db
 
 # .NET build artifacts
-/bin
-/obj
+bin/
+obj/
 *.user
 *.suo
 *.vs
