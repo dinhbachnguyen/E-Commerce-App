@@ -20,7 +20,6 @@ builder.Services.AddCors(options =>
           .AllowAnyMethod();
   });
 });
-});
 
 //builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 //    .AddJwtBearer(options =>
