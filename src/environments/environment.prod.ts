@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://15.237.174.42:5000'
+  apiUrl: 'https://ecommerce-app.bachnguyen.website'
+  // apiUrl: 'http://15.237.174.42:5000'
 };
