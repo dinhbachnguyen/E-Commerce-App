@@ -65,10 +65,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ecommerce-frontend:build:production"
+              "buildTarget": "ecommerce-app:build:production"
             },
             "development": {
-              "buildTarget": "ecommerce-frontend:build:development"
+              "buildTarget": "ecommerce-app:build:development"
             }
           },
           "defaultConfiguration": "development"
