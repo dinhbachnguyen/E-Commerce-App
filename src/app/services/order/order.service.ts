@@ -24,7 +24,7 @@ export interface Order {
   providedIn: 'root'
 })
 export class OrderService {
-  private apiUrl = environment.apiUrl + "5000/api/order"
+  private apiUrl = environment.apiUrl + "/api/order"
 
   constructor(
     private http: HttpClient,

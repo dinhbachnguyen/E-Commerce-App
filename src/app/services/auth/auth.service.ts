@@ -7,7 +7,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = environment.apiUrl + "5000/api/auth"
+  private apiUrl = environment.apiUrl + "/api/auth"
   private loggedIn = new BehaviorSubject<boolean>(false);
   public isLoggedIn$ = this.loggedIn.asObservable();
 
