@@ -50,3 +50,6 @@ obj/
 *.vs
 *.log
 
+# SQLite
+*.db-shm
+*.db-wal
