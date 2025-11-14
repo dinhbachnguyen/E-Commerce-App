@@ -18,13 +18,13 @@ export interface Product {
 export class ProductService {
   // private apiUrl = "/api/product"
 
-  private apiUrl = environment.apiUrl + "/api/product/"
+  private apiUrl = environment.apiUrl + "/api/product"
 
   constructor(private http: HttpClient) { }
 
   // Get all products
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl);
+    return this.http.get<Product[]>(`${this.apiUrl}/`);
   }
 
   // Get a single product by ID
