@@ -1,55 +1,53 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private apiUrl = environment.apiUrl + "/api/auth"
-  private loggedIn = new BehaviorSubject<boolean>(false);
-  public isLoggedIn$ = this.loggedIn.asObservable();
 
-  constructor(private http: HttpClient) {
-    // Check if token exists in localStorage
-    const token = localStorage.getItem('token');
-    this.loggedIn.next(!!token);
+  private userSubject = new BehaviorSubject<string | null>(this.getUsername());
+  user$ = this.userSubject.asObservable();
+  
+  constructor(private http: HttpClient) { }
+
+  register(data: any) {
+    return this.http.post(`${this.apiUrl}/register`, data);
   }
 
-  // Login user
-  login(email: string, password: string): Observable<any> {
-    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, { email, password })
-      .pipe(
-        tap(res => {
-          localStorage.setItem('token', res.token);
-          this.loggedIn.next(true);
-        })
-      );
+  login(data: any) {
+    return this.http.post(`${this.apiUrl}/login`, data);
   }
 
-  // Logout user
-  logout(): void {
+  logout() {
     localStorage.removeItem('token');
-    this.loggedIn.next(false);
+    localStorage.removeItem('username');
+    this.userSubject.next(null);
+    window.location.href = '/auth';
   }
 
-  // Get JWT token
   getToken(): string | null {
     return localStorage.getItem('token');
   }
 
-  // Check if user is logged in
-  isAuthenticated(): boolean {
+  saveToken(token: string) {
+    localStorage.setItem('token', token);
+
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const email = payload['sub'];
+    const username = email.split('@')[0];
+    localStorage.setItem('username', username);
+    this.userSubject.next(username);
+  }
+  isLoggedIn() {
     return !!localStorage.getItem('token');
   }
 
-  // Optional: add headers with token
-  getAuthHeaders(): HttpHeaders {
-    const token = this.getToken();
-    return new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
+  getUsername() {
+    return localStorage.getItem('username');
   }
 }
 

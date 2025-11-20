@@ -33,14 +33,14 @@ export class OrderService {
   ) { }
 
   // Submit a new order
-  submitOrder(order: Order): Observable<any> {
-    const headers = this.authService.getAuthHeaders();
-    return this.http.post(this.apiUrl, order, { headers });
-  }
+  // submitOrder(order: Order): Observable<any> {
+  //   const headers = this.authService.getAuthHeaders();
+  //   return this.http.post(this.apiUrl, order, { headers });
+  // }
 
   // Get all orders for the logged-in user
-  getOrders(): Observable<Order[]> {
-    const headers = this.authService.getAuthHeaders();
-    return this.http.get<Order[]>(this.apiUrl, { headers });
-  }
+  // getOrders(): Observable<Order[]> {
+  //   const headers = this.authService.getAuthHeaders();
+  //   return this.http.get<Order[]>(this.apiUrl, { headers });
+  // }
 }

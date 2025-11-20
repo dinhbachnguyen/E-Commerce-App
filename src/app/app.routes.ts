@@ -5,15 +5,16 @@ import { ProductListComponent } from './components/product-list/product-list';
 import { ProductDetailComponent } from './components/product-detail/product-detail';
 import { CartComponent } from './components/cart/cart';
 import { CheckoutComponent } from './components/checkout/checkout';
-import { LoginComponent } from './components/login/login';
+import { AuthGuard } from './guards/auth.guard';
+import { AuthComponent } from './components/auth/auth';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },                      // Homepage
   { path: 'products', component: ProductListComponent },       // All products
   { path: 'product/:id', component: ProductDetailComponent },  // Single product detail
   { path: 'cart', component: CartComponent },                  // Cart
-  { path: 'checkout', component: CheckoutComponent },          // Checkout
-  { path: 'login', component: LoginComponent },                // Login/Signup
+  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },          // Checkout
+  { path: 'auth', component: AuthComponent },
   { path: '**', redirectTo: '' }                               // Wildcard (fallback to home)
 ];
 

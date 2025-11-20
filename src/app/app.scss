@@ -11,7 +11,8 @@ header.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #1e293b; /* sleek dark navy */
+  background: #1e293b;
+  /* sleek dark navy */
   padding: 15px 40px;
   color: #fff;
   position: sticky;
@@ -21,7 +22,7 @@ header.navbar {
 }
 
 header.navbar .logo a {
-  color: #38bdf8; /* cyan accent */
+  color: #38bdf8;
   text-decoration: none;
   font-size: 1.6rem;
   font-weight: 700;
@@ -80,6 +81,7 @@ header.navbar nav a.active::after {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -111,4 +113,29 @@ header.navbar nav a.active::after {
     display: block;
     margin: 10px 0;
   }
+}
+
+/* User label styling */
+.user-label {
+  pointer-events: none;
+}
+
+/* Logout button styling */
+.logout {
+  background-color: #d34323;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.logout:hover {
+  background-color: #e01d1d;
+}
+
+header.navbar nav a.logout::after {
+  content: none;
 }

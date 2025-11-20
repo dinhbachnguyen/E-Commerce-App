@@ -8,8 +8,11 @@
     <a routerLink="/">Home</a>
     <a routerLink="/products">Products</a>
     <a routerLink="/cart">Cart</a>
-    <a routerLink="/login">Login</a>
+    <a *ngIf="!username" routerLink="/auth">Login / Register</a>
+    <a *ngIf="username" class="user-label">Hi, {{ username }}</a>
+    <a *ngIf="username" class="logout" (click)="logout()">Logout</a>
   </nav>
+
 </header>
 
 <!-- Main content -->
