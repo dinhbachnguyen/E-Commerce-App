@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CartService, CartItem } from '../../services/cart/cart.service';
+import { CartService, CartOrder } from '../../services/cart/cart.service';
 import { HttpClient } from '@angular/common/http';
 import { AppModule } from '../../app.module';
 
@@ -13,7 +13,7 @@ import { AppModule } from '../../app.module';
 export class CheckoutComponent implements OnInit {
 
   checkoutForm!: FormGroup;
-  cartItems: CartItem[] = [];
+  cartItems: CartOrder[] = [];
   total = 0;
 
   constructor(
@@ -34,10 +34,10 @@ export class CheckoutComponent implements OnInit {
     });
 
     // Get cart items
-    this.cartService.cartItems$.subscribe(items => {
-      this.cartItems = items;
-      this.total = this.cartService.getTotal();
-    });
+    // this.cartService.cartItems$.subscribe(items => {
+    //   this.cartItems = items;
+    //   this.total = this.cartService.getTotal();
+    // });
   }
 
   submitOrder() {
@@ -57,7 +57,7 @@ export class CheckoutComponent implements OnInit {
       .subscribe({
         next: (response) => {
           alert('Order placed successfully!');
-          this.cartService.clearCart(); // Clear cart after successful order
+          // this.cartService.clearCart(); // Clear cart after successful order
           this.checkoutForm.reset();
         },
         error: (err) => {

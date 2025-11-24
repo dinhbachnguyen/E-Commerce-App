@@ -21,7 +21,7 @@ public class AuthController : ControllerBase
   public IActionResult Register(RegisterDto dto)
   {
     var userExists = _context.Users.Any(u => u.Email == dto.Email);
-    if (userExists) return BadRequest("Email already taken");
+    if (userExists) return BadRequest(new { message = "Email already taken" });
 
     var user = new User
     {
@@ -32,7 +32,7 @@ public class AuthController : ControllerBase
     _context.Users.Add(user);
     _context.SaveChanges();
 
-    return Ok("User created");
+    return Ok(new { message = "User created" });
   }
 
   [HttpPost("login")]

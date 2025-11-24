@@ -6,7 +6,7 @@ import { AppModule } from '../../app.module';
 
 @Component({
   selector: 'app-auth',
-  imports: [AppModule], 
+  imports: [AppModule],
   templateUrl: './auth.html',
   styleUrls: ['./auth.scss']
 })
@@ -14,7 +14,7 @@ export class AuthComponent implements OnInit {
   authForm!: FormGroup;
   isLoginMode = true; // toggle between login and register
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.authForm = this.fb.group({
@@ -28,8 +28,6 @@ export class AuthComponent implements OnInit {
   }
 
   submit() {
-    console.log("hi")
-
     if (this.authForm.invalid) return;
 
     if (this.isLoginMode) {
@@ -37,9 +35,7 @@ export class AuthComponent implements OnInit {
       this.authService.login(this.authForm.value).subscribe({
         next: (res: any) => {
           this.authService.saveToken(res.token);
-          console.log("1")
           window.location.href = '/';
-          // this.router.navigate(['/']);
         },
         error: err => alert(err.error || 'Login failed')
       });
@@ -48,9 +44,11 @@ export class AuthComponent implements OnInit {
       this.authService.register(this.authForm.value).subscribe({
         next: () => {
           alert('Registration successful! Please login.');
-          this.isLoginMode = true; // switch to login after register
+          this.isLoginMode = true;
         },
-        error: err => alert(err.error || 'Registration failed')
+        error: err => {
+          alert(err.error?.message || 'Registration failed');
+        }
       });
     }
   }

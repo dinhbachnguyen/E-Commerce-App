@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CartService, CartItem } from '../cart/cart.service';
+import { CartService, CartOrder } from '../cart/cart.service';
 import { AuthService } from '../auth/auth.service';
 import { environment } from '../../../environments/environment';
 
@@ -15,7 +15,7 @@ export interface Order {
     postalCode: string;
     country: string;
   };
-  items: CartItem[];
+  items: CartOrder[];
   total: number;
   orderDate?: string;
 }

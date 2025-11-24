@@ -1,16 +1,13 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
 [Route("api/[controller]")]
 public class UserController : ControllerBase
 {
   private readonly AppDbContext _context;
-
-  public UserController(AppDbContext context)
-  {
-    _context = context;
-  }
+  public UserController(AppDbContext context) => _context = context;
 
   // Protected route — only accessible if JWT token is valid
   [Authorize]

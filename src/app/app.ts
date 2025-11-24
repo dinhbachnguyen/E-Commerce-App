@@ -18,7 +18,7 @@ export class App {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.authService.user$.subscribe(username => {
+    this.authService.username$.subscribe(username => {
       this.username = username;
     });
   }

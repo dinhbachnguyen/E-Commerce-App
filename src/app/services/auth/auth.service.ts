@@ -9,9 +9,12 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
   private apiUrl = environment.apiUrl + "/api/auth"
 
-  private userSubject = new BehaviorSubject<string | null>(this.getUsername());
-  user$ = this.userSubject.asObservable();
-  
+  private usernameSubject = new BehaviorSubject<string | null>(this.getUsername());
+  username$ = this.usernameSubject.asObservable();
+
+  private userIdSubject = new BehaviorSubject<string | null>(this.getUserId());
+  userId$ = this.userIdSubject.asObservable();
+
   constructor(private http: HttpClient) { }
 
   register(data: any) {
@@ -25,7 +28,9 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
-    this.userSubject.next(null);
+    localStorage.removeItem('userId');
+    this.usernameSubject.next(null);
+    this.userIdSubject.next(null);
     window.location.href = '/auth';
   }
 
@@ -39,8 +44,12 @@ export class AuthService {
     const payload = JSON.parse(atob(token.split('.')[1]));
     const email = payload['sub'];
     const username = email.split('@')[0];
+    const userId = payload['id'];
     localStorage.setItem('username', username);
-    this.userSubject.next(username);
+    localStorage.setItem('userId', userId);
+    this.usernameSubject.next(username);
+    this.userIdSubject.next(userId);
+
   }
   isLoggedIn() {
     return !!localStorage.getItem('token');
@@ -48,6 +57,10 @@ export class AuthService {
 
   getUsername() {
     return localStorage.getItem('username');
+  }
+
+  getUserId() {
+    return localStorage.getItem('userId');
   }
 }
 
