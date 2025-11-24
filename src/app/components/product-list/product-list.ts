@@ -8,7 +8,7 @@ export const backupProducts = [
   {
     id: 1,
     name: "Gaming Laptop",
-    description: "High performance laptop with RTX graphics and 16GB RAM.",
+    description: "High performance laptop with RTX graphic and 16GB RAM.",
     price: 1299.99,
     imageUrl: "gaming-laptop.jpg"
   },
