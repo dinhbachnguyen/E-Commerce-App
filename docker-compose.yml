@@ -19,7 +19,7 @@ services:
     image: caddy:2
     container_name: caddy
     volumes:
-      - /etc/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./Caddyfile:/etc/caddy/Caddyfile
     networks:
       - ecommerce-network
     ports:

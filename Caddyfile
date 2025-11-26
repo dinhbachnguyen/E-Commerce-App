@@ -1,0 +1,5 @@
+ecommerce-app.bachnguyen.website {
+    reverse_proxy /api/* ecommerce-backend:5000
+    root * /usr/share/nginx/html
+    file_server
+}
