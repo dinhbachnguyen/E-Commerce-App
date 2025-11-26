@@ -1,14 +1,31 @@
 services:
   backend:
-    build: ./ECommerceAPI     
+    build: ./ECommerceAPI
     container_name: ecommerce-backend
-    ports:
-      - "5000:5000"
+    networks:
+      - ecommerce-network
+    expose:
+      - "5000"   
 
   frontend:
-    build: .              
+    build: .
     container_name: ecommerce-frontend
+    networks:
+      - ecommerce-network
+    expose:
+      - "80"    
+
+  caddy:
+    image: caddy:2
+    container_name: caddy
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    networks:
+      - ecommerce-network
     ports:
       - "80:80"
-    depends_on:
-      - backend
+      - "443:443"
+
+networks:
+  ecommerce-network:
+    driver: bridge
