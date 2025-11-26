@@ -6,7 +6,7 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-RUN npm run build -- --configuration=docker
+RUN npm run build -- --configuration=production
 
 # Stage 2 - Serve with Nginx
 FROM nginx:alpine

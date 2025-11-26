@@ -1,16 +1,14 @@
-version: "3.9"
-
 services:
   backend:
-    build: ./ECommerceAPI      # points to backend
+    build: ./ECommerceAPI     
     container_name: ecommerce-backend
     ports:
-      - "5001:5000"
+      - "5000:5000"
 
   frontend:
-    build: .              # points to frontend 
+    build: .              
     container_name: ecommerce-frontend
     ports:
-      - "8081:80"
+      - "80:80"
     depends_on:
       - backend
