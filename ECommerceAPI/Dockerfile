@@ -17,6 +17,7 @@ WORKDIR /app
 # Copy published DLL from build stage
 COPY --from=build /app .
 
+ENV ASPNETCORE_URLS=http://+:5000
 # Expose backend port
 EXPOSE 5000
 
