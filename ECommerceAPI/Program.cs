@@ -15,7 +15,7 @@ builder.Services.AddCors(options =>
 {
   options.AddPolicy("AllowAngularApp", policy =>
   {
-    policy.WithOrigins("http://localhost:4200", "https://ecommerce-app.bachnguyen.website", "http://localhost") 
+    policy.WithOrigins("http://localhost:4200", "https://ecommerce-app.bachnguyen.website")
           .AllowAnyHeader()
           .AllowAnyMethod();
   });
@@ -45,7 +45,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
   var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-  db.Database.Migrate(); 
+  db.Database.Migrate();
 }
 
 app.UseSwagger();
