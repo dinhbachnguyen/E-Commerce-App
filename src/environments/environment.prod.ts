@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: `https://${window.location.hostname}`
+  apiUrl: ``
+  // apiUrl: `https://${window.location.hostname}`
 };
