@@ -6,16 +6,15 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-RUN npm run build -- --configuration production
+RUN npm run build
 
-# Stage 2 - Serve using http-server-spa
+# Stage - Serve using http-server-spa
 FROM node:20-alpine
 WORKDIR /app
 RUN npm install -g http-server-spa
 COPY --from=build /app/dist/ecommerce-app/browser /app
 EXPOSE 4200
 CMD ["http-server-spa", ".", "index.html", "4200"]
-
 
 # Stage - Serve with Nginx
 # FROM nginx:alpine
