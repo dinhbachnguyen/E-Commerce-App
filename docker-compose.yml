@@ -9,4 +9,5 @@ services:
     build: .              
     container_name: ecommerce-frontend
     ports:
-      - "80:4200"
+      - "80:80"
+      - "443:443"
