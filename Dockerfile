@@ -11,7 +11,8 @@ RUN npm run build
 # Stage 2 - Serve with Nginx
 FROM nginx:alpine
 COPY --from=build /app/dist/ecommerce-app/browser /usr/share/nginx/html
-EXPOSE 80
+COPY default.conf /etc/nginx/conf.d/default.conf
+EXPOSE 4200
 CMD ["nginx", "-g", "daemon off;"]
 
 
