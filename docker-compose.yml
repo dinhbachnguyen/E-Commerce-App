@@ -11,14 +11,6 @@ services:
     ports:
       - "80:80"
       - "443:443"
-
-  nginx:
-    image: nginx:latest
-    container_name: ecommerce-nginx
-    restart: always
-    ports:
-      - "80:80"
-      - "443:443"
     volumes:
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/www/certbot
