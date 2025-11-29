@@ -4,6 +4,8 @@ services:
     container_name: ecommerce-backend
     ports:
       - "5000:5000"
+    networks:
+      - app_net
 
   frontend:
     build: .              
@@ -14,6 +16,8 @@ services:
     volumes:
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/www/certbot
+    networks:
+      - app_net
 
   certbot:
     image: certbot/certbot
@@ -22,6 +26,11 @@ services:
     volumes:
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/www/certbot
+    networks:
+      - app_net
+
+networks:
+  app_net:
 
 volumes:
   certbot-etc:
