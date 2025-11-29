@@ -26,7 +26,6 @@ services:
   certbot:
     image: certbot/certbot
     container_name: ecommerce-certbot
-    entrypoint: ""
     command: certonly --webroot -w /var/www/certbot --email nguyendinhbach2015@gmail.com --agree-tos --no-eff-email -d ecommerce-app.bachnguyen.website
     volumes:
       - certbot-etc:/etc/letsencrypt
