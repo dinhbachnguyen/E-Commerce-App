@@ -11,3 +11,27 @@ services:
     ports:
       - "80:80"
       - "443:443"
+
+  nginx:
+    image: nginx:latest
+    container_name: ecommerce-nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/www/certbot
+
+  certbot:
+    image: certbot/certbot
+    container_name: ecommerce-certbot
+    entrypoint: ""
+    command: certonly --webroot -w /var/www/certbot --email nguyendinhbach2015@gmail.com --agree-tos --no-eff-email -d ecommerce-app.bachnguyen.website
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/www/certbot
+
+volumes:
+  certbot-etc:
+  certbot-var:
