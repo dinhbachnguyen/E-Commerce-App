@@ -1,9 +1,28 @@
 services:
+  postgres:
+    image: postgres:15
+    container_name: ecommerce-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: yourpassword
+      POSTGRES_DB: EcommerceDb
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app_net
+
   backend:
     build: ./ECommerceAPI     
     container_name: ecommerce-backend
     ports:
       - "5000:5000"
+    environment:
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=EcommerceDb;Username=postgres;Password=yourpassword"
+    depends_on:
+      - postgres
     networks:
       - app_net
 
@@ -35,3 +54,4 @@ networks:
 volumes:
   certbot-etc:
   certbot-var:
+  postgres-data:
