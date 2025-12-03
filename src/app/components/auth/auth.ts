@@ -36,7 +36,6 @@ export class AuthComponent implements OnInit {
       this.authService.login(this.authForm.value).subscribe({
         next: (res: any) => {
           this.authService.saveToken(res.token);
-          console.log("hi")
           this.toastService.show('Login Successful', 'success', 3000);
           this.router.navigate(['/']);
           // setTimeout(() => {

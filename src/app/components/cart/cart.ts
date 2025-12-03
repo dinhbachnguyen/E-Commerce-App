@@ -37,7 +37,6 @@ export class CartComponent implements OnInit {
 
   removeCartItem(productId: number) {
     if (this.userId) {
-      console.log("id=", productId)
       this.cartService.removeCartItem(productId, this.userId).subscribe(() => {
         this.cartItems = this.cartItems.filter(i => i.productId !== productId);
         this.calculateTotal();
