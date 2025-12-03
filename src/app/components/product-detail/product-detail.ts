@@ -3,9 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product/product.service';
 import { CartService } from '../../services/cart/cart.service';
 import { AppModule } from '../../app.module';
-import { backupProducts } from '../product-list/product-list';
 import { AuthService } from '../../services/auth/auth.service';
-
+import { ToastService } from '../../services/toast/toast.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -18,19 +17,18 @@ export class ProductDetailComponent implements OnInit {
 
   product: any;
   quantity: number = 1;
-  backupProducts = backupProducts;
   userId: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
     private cartService: CartService,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastService: ToastService
   ) { }
 
   ngOnInit(): void {
     const productId = Number(this.route.snapshot.paramMap.get('id'));
-    this.product = this.backupProducts.find(p => p.id === productId);
     this.productService.getProduct(productId).subscribe({
       next: (res) => this.product = res,
       error: (err) => console.error(err)
@@ -42,7 +40,15 @@ export class ProductDetailComponent implements OnInit {
 
   addToCart(product: any) {
     if (!this.userId) {
-      alert('You need to sign in to add products to your cart.');
+      this.cartService.addToGuestCart({
+        productId: product.id,
+        quantity: this.quantity,
+        product: {
+          name: product.name,
+          price: product.price
+        }
+      });
+      this.toastService.show(`${this.quantity} ${product.name} added to cart!`, 'success', 2000);
       return;
     }
 
@@ -52,7 +58,7 @@ export class ProductDetailComponent implements OnInit {
       quantity: this.quantity,
     }).subscribe({
       next: (res) => {
-        // alert(`${product.name} added to cart!`);
+        this.toastService.show(`${this.quantity} ${product.name} added to cart!`, 'success', 2000);
       },
       error: (err) => console.error('Error adding to cart', err)
     });

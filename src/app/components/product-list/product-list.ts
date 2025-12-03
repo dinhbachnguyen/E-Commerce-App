@@ -3,50 +3,18 @@ import { ProductService } from '../../services/product/product.service';
 import { CartService } from '../../services/cart/cart.service';
 import { AppModule } from '../../app.module';
 import { AuthService } from '../../services/auth/auth.service';
+import { ToastService } from '../../services/toast/toast.service';
 
-export const backupProducts = [
-  {
-    id: 1,
-    name: "Gaming Laptop",
-    description: "High performance laptop with RTX graphics and 16GB RAM.",
-    price: 1299.99,
-    imageUrl: "gaming-laptop.jpg"
-  },
-  {
-    id: 2,
-    name: "Wireless Headphones",
-    description: "Noise-cancelling over-ear headphones with long battery life.",
-    price: 199.99,
-    imageUrl: "wireless-headphones.jpg"
-  },
-  {
-    id: 3,
-    name: "Smartphone",
-    description: "Latest model smartphone with OLED display and 128GB storage.",
-    price: 899.99,
-    imageUrl: "smartphone.jpg"
-  },
-  {
-    id: 4,
-    name: "Mechanical Keyboard",
-    description: "RGB backlit mechanical keyboard with customizable keys.",
-    price: 129.99,
-    imageUrl: "mechanical-keyboard.jpg"
-  },
-  {
-    id: 5,
-    name: 'Smartwatch',
-    price: 249.99,
-    imageUrl: 'smartwatch.jpg'
-  }
-];
+interface Toast {
+  id: number;
+  message: string;
+}
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.html',
   styleUrls: ['./product-list.scss'],
   imports: [AppModule]
-
 })
 
 export class ProductListComponent implements OnInit {
@@ -54,17 +22,15 @@ export class ProductListComponent implements OnInit {
   products: any[] = [];
   userId: string | null = null;
 
-  // backupProducts = backupProducts;
-  backupProducts = [];
 
   constructor(
     private productService: ProductService,
     private cartService: CartService,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastService: ToastService
   ) { }
 
   ngOnInit(): void {
-    this.products = this.backupProducts;
     this.productService.getProducts().subscribe({
       next: (res) => {
         this.products = [...this.products, ...res];
@@ -80,18 +46,15 @@ export class ProductListComponent implements OnInit {
 
   addToCart(product: any) {
     if (!this.userId) {
-      let guestCart = JSON.parse(localStorage.getItem('guestCart') || '[]');
-      const index = guestCart.findIndex((item: any) => item.productId === product.id);
-      if (index > -1) {
-        guestCart[index].quantity += 1;
-      } else {
-        guestCart.push({
-          productId: product.id,
-          quantity: 1
-        });
-      }
-      localStorage.setItem('guestCart', JSON.stringify(guestCart));
-      alert('Product added to guest cart!');
+      this.cartService.addToGuestCart({
+        productId: product.id,
+        quantity: 1,
+        product: {
+          name: product.name,
+          price: product.price
+        }
+      });
+      this.toastService.show(`${product.name} added to cart!`, 'success', 2000);
       return;
     }
 
@@ -101,6 +64,7 @@ export class ProductListComponent implements OnInit {
       quantity: 1,
     }).subscribe({
       next: (res) => {
+        this.toastService.show(`${product.name} added to cart!`, 'success', 2000);
       },
       error: (err) => console.error('Error adding to cart', err)
     });

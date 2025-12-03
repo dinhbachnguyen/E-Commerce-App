@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { BehaviorSubject } from 'rxjs';
+import { ToastService } from '../toast/toast.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,7 @@ export class AuthService {
   private userIdSubject = new BehaviorSubject<string | null>(this.getUserId());
   userId$ = this.userIdSubject.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private toastService: ToastService, private router: Router) { }
 
   register(data: any) {
     return this.http.post(`${this.apiUrl}/register`, data);
@@ -31,7 +33,11 @@ export class AuthService {
     localStorage.removeItem('userId');
     this.usernameSubject.next(null);
     this.userIdSubject.next(null);
-    window.location.href = '/auth';
+    this.toastService.show('Logout Successful', 'error', 3000);
+    this.router.navigate(['/auth']);
+    // setTimeout(() => {
+    //   window.location.href = '/auth';
+    // }, 1000);
   }
 
   getToken(): string | null {

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { AppModule } from '../../app.module';
+import { ToastService } from '../../services/toast/toast.service';
 
 @Component({
   selector: 'app-auth',
@@ -14,7 +15,7 @@ export class AuthComponent implements OnInit {
   authForm!: FormGroup;
   isLoginMode = true; // toggle between login and register
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private toastService: ToastService, private router: Router) { }
 
   ngOnInit(): void {
     this.authForm = this.fb.group({
@@ -35,7 +36,12 @@ export class AuthComponent implements OnInit {
       this.authService.login(this.authForm.value).subscribe({
         next: (res: any) => {
           this.authService.saveToken(res.token);
-          window.location.href = '/';
+          console.log("hi")
+          this.toastService.show('Login Successful', 'success', 3000);
+          this.router.navigate(['/']);
+          // setTimeout(() => {
+          // window.location.href = '/';
+          // }, 1000); 
         },
         error: err => alert(err.error || 'Login failed')
       });
@@ -43,7 +49,8 @@ export class AuthComponent implements OnInit {
       // Register
       this.authService.register(this.authForm.value).subscribe({
         next: () => {
-          alert('Registration successful! Please login.');
+          this.toastService.show('Registration successful! Please login.', 'success', 3000);
+          this.authForm.reset();
           this.isLoginMode = true;
         },
         error: err => {

@@ -2,10 +2,11 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { AuthService } from './services/auth/auth.service';
 import { AppModule } from './app.module';
+import { ToastsComponent } from "./components/toast/toast";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, AppModule],
+  imports: [RouterOutlet, RouterLink, AppModule, ToastsComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   standalone: true

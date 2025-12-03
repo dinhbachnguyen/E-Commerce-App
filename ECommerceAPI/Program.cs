@@ -62,18 +62,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-
-
-//using (var scope = app.Services.CreateScope())
-//{
-//  var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-//  if (!db.Products.Any())
-//  {
-//    db.Products.AddRange(
-//        new Product { Name = "Laptop", Description = "Gaming Laptop", Price = 1299.99M },
-//        new Product { Name = "Headphones", Description = "Wireless Headphones", Price = 199.99M }
-//    );
-//    db.SaveChanges();
-//  }
-//}

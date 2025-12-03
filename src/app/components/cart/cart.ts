@@ -18,35 +18,47 @@ export class CartComponent implements OnInit {
   constructor(private cartService: CartService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    // this.cartService.cartItems$.subscribe(items => {
-    //   this.cartItems = items;
-    //   this.total = this.cartService.getTotal();
-    // });
     this.authService.userId$.subscribe(userId => {
       this.userId = Number(userId);
+      if (this.userId) {
+        this.cartService.getCart(Number(this.userId)).subscribe(items => {
+          this.cartItems = items;
+          this.calculateTotal()
+        });
+      } else {
+        this.cartService.cartItems$.subscribe(items => {
+          this.cartItems = items;
+          this.calculateTotal();
+        });
+      }
     });
-    this.cartService.getCart(Number(this.userId)).subscribe(items => {
-      this.cartItems = items;
-      this.calculateTotal()
-    });
+
   }
 
   removeCartItem(productId: number) {
-    console.log("id=", productId)
-    this.cartService.removeCartItem(productId, this.userId).subscribe(() => {
-      this.cartItems = this.cartItems.filter(i => i.productId !== productId);
-      this.calculateTotal();
-    });
+    if (this.userId) {
+      console.log("id=", productId)
+      this.cartService.removeCartItem(productId, this.userId).subscribe(() => {
+        this.cartItems = this.cartItems.filter(i => i.productId !== productId);
+        this.calculateTotal();
+      });
+    } else {
+      this.cartService.removeGuestCart(productId);
+    }
   }
 
   clearCart() {
-    this.cartService.clearCart(this.userId).subscribe({
-      next: () => {
-        this.cartItems = [];
-        this.total = 0;
-      },
-      error: (err) => console.error('Error clearing cart', err)
-    });
+    if (this.userId) {
+      this.cartService.clearCart(this.userId).subscribe({
+        next: () => {
+          this.cartItems = [];
+          this.total = 0;
+        },
+        error: (err) => console.error('Error clearing cart', err)
+      });
+    } else {
+      this.cartService.clearGuestCart();
+    }
   }
 
   calculateTotal() {
@@ -54,21 +66,20 @@ export class CartComponent implements OnInit {
   }
 
   updateQuantity(productId: number, quantity: number) {
-    this.cartService.updateQuantity(this.userId, productId, quantity)
-      .subscribe({
-        next: () => {
-          const item = this.cartItems.find(i => i.productId === productId);
-          if (item) {
-            item.quantity = quantity;
-          }
-          this.calculateTotal(); 
-        },
-        error: (err) => console.error('Error updating quantity', err)
-      });
+    if (this.userId) {
+      this.cartService.updateQuantity(this.userId, productId, quantity)
+        .subscribe({
+          next: () => {
+            const item = this.cartItems.find(i => i.productId === productId);
+            if (item) {
+              item.quantity = quantity;
+            }
+            this.calculateTotal();
+          },
+          error: (err) => console.error('Error updating quantity', err)
+        });
+    } else {
+      this.cartService.updateGuestQuantity(productId, quantity);
+    }
   }
-
-  // updateQuantity(productId: number, quantity: number) {
-  //   if (quantity < 1) quantity = 1; // Minimum 1
-  //   this.cartService.updateQuantity(productId, quantity);
-  // }
 }
