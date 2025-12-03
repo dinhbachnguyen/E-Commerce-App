@@ -80,7 +80,18 @@ export class ProductListComponent implements OnInit {
 
   addToCart(product: any) {
     if (!this.userId) {
-      alert('You need to sign in to add products to your cart.');
+      let guestCart = JSON.parse(localStorage.getItem('guestCart') || '[]');
+      const index = guestCart.findIndex((item: any) => item.productId === product.id);
+      if (index > -1) {
+        guestCart[index].quantity += 1;
+      } else {
+        guestCart.push({
+          productId: product.id,
+          quantity: 1
+        });
+      }
+      localStorage.setItem('guestCart', JSON.stringify(guestCart));
+      alert('Product added to guest cart!');
       return;
     }
 

@@ -52,7 +52,7 @@ export class CheckoutComponent implements OnInit {
       total: this.total
     };
 
-    // Replace with your actual API URL
+    // Replace with API URL
     this.http.post('https://localhost:/api/order', orderPayload)
       .subscribe({
         next: (response) => {
