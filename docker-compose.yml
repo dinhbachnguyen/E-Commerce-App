@@ -5,7 +5,7 @@ services:
     restart: always
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: yourpassword
+      POSTGRES_PASSWORD: 1234
       POSTGRES_DB: EcommerceDb
     volumes:
       - postgres-data:/var/lib/postgresql/data
@@ -20,7 +20,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=EcommerceDb;Username=postgres;Password=yourpassword"
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=EcommerceDb;Username=postgres;Password=1234"
     depends_on:
       - postgres
     networks:
